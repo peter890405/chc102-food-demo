@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "chc102fooddemo38a55e17": {}
+      },
+      "api": {
+        "chc102fooddemo": {}
+      },
+      "storage": {
+        "imagestorage": {}
       }
     }
   }
