@@ -6,7 +6,7 @@ type Note @model @auth(rules: [ { allow: public } ] ){
   id: ID!
   name: String!
   month: Int
-  day: Int
+  day:Int
   price: Int
   image: String
 }
