@@ -14,13 +14,13 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NoteUpdateFormInputValues = {
     name?: string;
-    EXP?: string;
+    EXP?: number;
     price?: number;
     image?: string;
 };
 export declare type NoteUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
-    EXP?: ValidationFunction<string>;
+    EXP?: ValidationFunction<number>;
     price?: ValidationFunction<number>;
     image?: ValidationFunction<string>;
 };
