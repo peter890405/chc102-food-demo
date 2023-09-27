@@ -46,7 +46,8 @@ const App = ({ signOut }) => {
     const image = form.get("image");
     const data = {
       name: form.get("name"),
-      description: form.get("description"),
+      EXP: form.get("EXP"),
+      price: form.get("price"),
       image: image.name,
     };
     if (!!data.image) await Storage.put(data.name, image);
@@ -71,7 +72,7 @@ const App = ({ signOut }) => {
 
   return (
     <View className="App">
-      <Heading level={1}>My Notes App</Heading>
+      <Heading level={1}>剩食系統</Heading>
       <View as="form" margin="3rem 0" onSubmit={createNote}>
         <Flex direction="row" justifyContent="center">
           <TextField
@@ -83,9 +84,17 @@ const App = ({ signOut }) => {
             required
           />
           <TextField
-            name="description"
-            placeholder="Note Description"
-            label="Note Description"
+            name="EXP"
+            placeholder="Note EXP"
+            label="Note EXP"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="price"
+            placeholder="Note price"
+            label="Note price"
             labelHidden
             variation="quiet"
             required
@@ -101,7 +110,7 @@ const App = ({ signOut }) => {
           </Button>
         </Flex>
       </View>
-      <Heading level={2}>Current Notes</Heading>
+      <Heading level={2}>目前剩食</Heading>
       <View margin="3rem 0">
         {notes.map((note) => (
         <Flex
@@ -113,7 +122,8 @@ const App = ({ signOut }) => {
           <Text as="strong" fontWeight={700}>
             {note.name}
           </Text>
-          <Text as="span">{note.description}</Text>
+          <Text as="span">{note.EXP}</Text>
+          <Text as="span">{note.price}</Text>
           {note.image && (
             <Image
               src={note.image}
