@@ -46,11 +46,12 @@ const App = ({ signOut }) => {
     const image = form.get("image");
     const data = {
       name: form.get("name"),
-      EXP: form.get("EXP"),
+      month: form.get("month"),
+      day: form.get("day"),
       price: form.get("price"),
       image: image.name,
     };
-    if (!!data.image) await Storage.put(data.name, image);
+    if (!!data.image) await Storage.put(data.name,image);
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -84,9 +85,17 @@ const App = ({ signOut }) => {
             required
           />
           <TextField
-            name="EXP"
-            placeholder="Note EXP"
-            label="Note EXP"
+            name="month"
+            placeholder="Note month"
+            label="Note month"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="day"
+            placeholder="Note day"
+            label="Note day"
             labelHidden
             variation="quiet"
             required
@@ -122,7 +131,7 @@ const App = ({ signOut }) => {
           <Text as="strong" fontWeight={700}>
             {note.name}
           </Text>
-          <Text as="span">EXP:{note.EXP}月</Text>
+          <Text as="span">EXP:{note.month}月{note.day}日</Text>
           <Text as="span">價格:{note.price}元</Text>
           {note.image && (
             <Image
