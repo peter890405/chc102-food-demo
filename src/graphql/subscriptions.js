@@ -6,7 +6,8 @@ export const onCreateNote = /* GraphQL */ `
     onCreateNote(filter: $filter) {
       id
       name
-      description
+      EXP
+      price
       image
       createdAt
       updatedAt
@@ -19,7 +20,8 @@ export const onUpdateNote = /* GraphQL */ `
     onUpdateNote(filter: $filter) {
       id
       name
-      description
+      EXP
+      price
       image
       createdAt
       updatedAt
@@ -32,7 +34,8 @@ export const onDeleteNote = /* GraphQL */ `
     onDeleteNote(filter: $filter) {
       id
       name
-      description
+      EXP
+      price
       image
       createdAt
       updatedAt

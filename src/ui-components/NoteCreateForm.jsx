@@ -24,24 +24,26 @@ export default function NoteCreateForm(props) {
   } = props;
   const initialValues = {
     name: "",
-    description: "",
+    EXP: "",
+    price: "",
     image: "",
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [description, setDescription] = React.useState(
-    initialValues.description
-  );
+  const [EXP, setEXP] = React.useState(initialValues.EXP);
+  const [price, setPrice] = React.useState(initialValues.price);
   const [image, setImage] = React.useState(initialValues.image);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
-    setDescription(initialValues.description);
+    setEXP(initialValues.EXP);
+    setPrice(initialValues.price);
     setImage(initialValues.image);
     setErrors({});
   };
   const validations = {
     name: [{ type: "Required" }],
-    description: [],
+    EXP: [],
+    price: [],
     image: [],
   };
   const runValidationTasks = async (
@@ -71,7 +73,8 @@ export default function NoteCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           name,
-          description,
+          EXP,
+          price,
           image,
         };
         const validationResponses = await Promise.all(
@@ -136,7 +139,8 @@ export default function NoteCreateForm(props) {
           if (onChange) {
             const modelFields = {
               name: value,
-              description,
+              EXP,
+              price,
               image,
             };
             const result = onChange(modelFields);
@@ -153,30 +157,63 @@ export default function NoteCreateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Description"
+        label="Exp"
         isRequired={false}
         isReadOnly={false}
-        value={description}
+        type="date"
+        value={EXP}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
-              description: value,
+              EXP: value,
+              price,
               image,
             };
             const result = onChange(modelFields);
-            value = result?.description ?? value;
+            value = result?.EXP ?? value;
           }
-          if (errors.description?.hasError) {
-            runValidationTasks("description", value);
+          if (errors.EXP?.hasError) {
+            runValidationTasks("EXP", value);
           }
-          setDescription(value);
+          setEXP(value);
         }}
-        onBlur={() => runValidationTasks("description", description)}
-        errorMessage={errors.description?.errorMessage}
-        hasError={errors.description?.hasError}
-        {...getOverrideProps(overrides, "description")}
+        onBlur={() => runValidationTasks("EXP", EXP)}
+        errorMessage={errors.EXP?.errorMessage}
+        hasError={errors.EXP?.hasError}
+        {...getOverrideProps(overrides, "EXP")}
+      ></TextField>
+      <TextField
+        label="Price"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={price}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              EXP,
+              price: value,
+              image,
+            };
+            const result = onChange(modelFields);
+            value = result?.price ?? value;
+          }
+          if (errors.price?.hasError) {
+            runValidationTasks("price", value);
+          }
+          setPrice(value);
+        }}
+        onBlur={() => runValidationTasks("price", price)}
+        errorMessage={errors.price?.errorMessage}
+        hasError={errors.price?.hasError}
+        {...getOverrideProps(overrides, "price")}
       ></TextField>
       <TextField
         label="Image"
@@ -188,7 +225,8 @@ export default function NoteCreateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              description,
+              EXP,
+              price,
               image: value,
             };
             const result = onChange(modelFields);
