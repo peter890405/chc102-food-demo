@@ -51,7 +51,7 @@ const App = ({ signOut }) => {
       price: form.get("price"),
       image: image.name,
     };
-    if (!!data.image) await Storage.put(data.name,image);
+    if (!!data.image) await Storage.put(data.name, image);
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -131,7 +131,7 @@ const App = ({ signOut }) => {
           <Text as="strong" fontWeight={700}>
             {note.name}
           </Text>
-          <Text as="span">EXP:{note.month}月{note.day}日</Text>
+          <Text as="span">EXP:{note.month}月</Text>
           <Text as="span">價格:{note.price}元</Text>
           {note.image && (
             <Image

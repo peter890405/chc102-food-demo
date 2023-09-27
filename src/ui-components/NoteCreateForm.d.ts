@@ -14,13 +14,15 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type NoteCreateFormInputValues = {
     name?: string;
-    EXP?: number;
+    month?: number;
+    day?: number;
     price?: number;
     image?: string;
 };
 export declare type NoteCreateFormValidationValues = {
     name?: ValidationFunction<string>;
-    EXP?: ValidationFunction<number>;
+    month?: ValidationFunction<number>;
+    day?: ValidationFunction<number>;
     price?: ValidationFunction<number>;
     image?: ValidationFunction<string>;
 };
@@ -28,7 +30,8 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type NoteCreateFormOverridesProps = {
     NoteCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    EXP?: PrimitiveOverrideProps<TextFieldProps>;
+    month?: PrimitiveOverrideProps<TextFieldProps>;
+    day?: PrimitiveOverrideProps<TextFieldProps>;
     price?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

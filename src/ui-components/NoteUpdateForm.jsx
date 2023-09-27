@@ -26,12 +26,14 @@ export default function NoteUpdateForm(props) {
   } = props;
   const initialValues = {
     name: "",
-    EXP: "",
+    month: "",
+    day: "",
     price: "",
     image: "",
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [EXP, setEXP] = React.useState(initialValues.EXP);
+  const [month, setMonth] = React.useState(initialValues.month);
+  const [day, setDay] = React.useState(initialValues.day);
   const [price, setPrice] = React.useState(initialValues.price);
   const [image, setImage] = React.useState(initialValues.image);
   const [errors, setErrors] = React.useState({});
@@ -40,7 +42,8 @@ export default function NoteUpdateForm(props) {
       ? { ...initialValues, ...noteRecord }
       : initialValues;
     setName(cleanValues.name);
-    setEXP(cleanValues.EXP);
+    setMonth(cleanValues.month);
+    setDay(cleanValues.day);
     setPrice(cleanValues.price);
     setImage(cleanValues.image);
     setErrors({});
@@ -63,7 +66,8 @@ export default function NoteUpdateForm(props) {
   React.useEffect(resetStateValues, [noteRecord]);
   const validations = {
     name: [{ type: "Required" }],
-    EXP: [],
+    month: [],
+    day: [],
     price: [],
     image: [],
   };
@@ -94,7 +98,8 @@ export default function NoteUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           name,
-          EXP: EXP ?? null,
+          month: month ?? null,
+          day: day ?? null,
           price: price ?? null,
           image: image ?? null,
         };
@@ -158,7 +163,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name: value,
-              EXP,
+              month,
+              day,
               price,
               image,
             };
@@ -176,12 +182,12 @@ export default function NoteUpdateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Exp"
+        label="Month"
         isRequired={false}
         isReadOnly={false}
         type="number"
         step="any"
-        value={EXP}
+        value={month}
         onChange={(e) => {
           let value = isNaN(parseInt(e.target.value))
             ? e.target.value
@@ -189,22 +195,55 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              EXP: value,
+              month: value,
+              day,
               price,
               image,
             };
             const result = onChange(modelFields);
-            value = result?.EXP ?? value;
+            value = result?.month ?? value;
           }
-          if (errors.EXP?.hasError) {
-            runValidationTasks("EXP", value);
+          if (errors.month?.hasError) {
+            runValidationTasks("month", value);
           }
-          setEXP(value);
+          setMonth(value);
         }}
-        onBlur={() => runValidationTasks("EXP", EXP)}
-        errorMessage={errors.EXP?.errorMessage}
-        hasError={errors.EXP?.hasError}
-        {...getOverrideProps(overrides, "EXP")}
+        onBlur={() => runValidationTasks("month", month)}
+        errorMessage={errors.month?.errorMessage}
+        hasError={errors.month?.hasError}
+        {...getOverrideProps(overrides, "month")}
+      ></TextField>
+      <TextField
+        label="Day"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={day}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              name,
+              month,
+              day: value,
+              price,
+              image,
+            };
+            const result = onChange(modelFields);
+            value = result?.day ?? value;
+          }
+          if (errors.day?.hasError) {
+            runValidationTasks("day", value);
+          }
+          setDay(value);
+        }}
+        onBlur={() => runValidationTasks("day", day)}
+        errorMessage={errors.day?.errorMessage}
+        hasError={errors.day?.hasError}
+        {...getOverrideProps(overrides, "day")}
       ></TextField>
       <TextField
         label="Price"
@@ -220,7 +259,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              EXP,
+              month,
+              day,
               price: value,
               image,
             };
@@ -247,7 +287,8 @@ export default function NoteUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              EXP,
+              month,
+              day,
               price,
               image: value,
             };
